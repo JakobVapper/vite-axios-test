@@ -1,11 +1,10 @@
 <template>
   <div>
-    <h1>The Breaking Bad Characters</h1>
-    <ul v-if="characters">
-      <li v-for="character in characters" :key="character.char_id">
-        {{ character.name }} - {{ character.nickname }}
-      </li>
-    </ul>
+    <h1>OpenWeatherMap andmed</h1>
+    <div v-if="weatherData">
+      <p>Temperatuur: {{ weatherData.main.temp }} K</p>
+      <p>Ilm: {{ weatherData.weather[0].description }}</p>
+    </div>
     <div v-else>Loading...</div>
   </div>
 </template>
@@ -14,14 +13,19 @@
 export default {
   data() {
     return {
-      characters: null
+      weatherData: null
     }
   },
   mounted() {
     
-    this.$axios.get('/characters')
+    this.$axios.get('/weather', {
+      params: {
+        q: 'Tallinn', 
+        appid: 'YOUR_API_KEY'
+      }
+    })
       .then(response => {
-        this.characters = response.data
+        this.weatherData = response.data
       })
       .catch(error => {
         console.error(error)
