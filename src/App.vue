@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>OpenWeatherMap andmed</h1>
+    <h1>OpenWeatherMap data</h1>
     <div v-if="weatherData">
       <p>Temperatuur: {{ weatherData.main.temp }} K</p>
       <p>Ilm: {{ weatherData.weather[0].description }}</p>
@@ -20,8 +20,8 @@ export default {
     
     this.$axios.get('/weather', {
       params: {
-        q: 'Tallinn', 
-        appid: 'YOUR_API_KEY'
+        q: 'Kuressaare', 
+        appid: '93d7a9d717166f5791ada2d735aae574'
       }
     })
       .then(response => {
